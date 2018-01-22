@@ -74,6 +74,11 @@ img.alignright,
   text-decoration:none;
   background-color:rgba(108,39,55,.6);
 }
+input[type="submit"].btn-main{
+  -webkit-transition:all .3s ease;
+  transition:all .3s ease;
+  border:none;
+}
 
 h1{
   font-size:70px;
@@ -456,6 +461,35 @@ aside#secondary>section{
   font-family:"Saira Extra Condensed", sans-serif;
   text-transform:uppercase;
   font-weight:500;
+}
+
+.contact-info{
+  text-align:center;
+  text-transform:uppercase;
+}
+.contact-info h2>span{
+  display:block;
+  font-weight:400;
+}
+.contact-form{
+  margin-top:40px;
+  max-width:450px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.contact-form .form-control{
+  font-family:"Saira Extra Condensed", sans-serif;
+  font-size:21px;
+  border:1px solid #000;
+  border-radius:0;
+}
+.contact-form .form-group h4{
+  font-family:"Saira Extra Condensed", sans-serif;
+  font-size:21px;
+}
+.contact-form .btn-main{
+  margin-top:0;
+  width:100%;
 }
 
 footer{
