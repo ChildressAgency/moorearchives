@@ -57,7 +57,8 @@ img.alignright,
   margin-bottom:0px;
 }
 
-.btn-main{
+.btn-main,
+.pager li>a.btn-main{
   display:inline-block;
   color:#fff;
   font-family:"Saira Extra Condensed", sans-serif;
@@ -67,9 +68,13 @@ img.alignright,
   background-color:rgba(108,39,55,1);
   padding:5px 25px;
   margin-top:40px;
+  border:none;
+  border-radius:0;
 }
 .btn-main:hover,
-.btn-main:focus{
+.btn-main:focus,
+.pager li>a.btn-main:hover,
+.pager li>a.btn-main:focus{
   color:#fff;
   text-decoration:none;
   background-color:rgba(108,39,55,.6);
@@ -95,6 +100,13 @@ h3{
   text-transform:uppercase;
   font-weight:700;
 }
+h4{
+  text-transform:uppercase;
+  font-family:"Saira Extra Condensed", sans-serif;
+  font-weight:700;
+  font-size:21px;
+}
+
 hr{
   border-color:#6c2737;
 }
@@ -483,10 +495,6 @@ aside#secondary>section{
   border:1px solid #000;
   border-radius:0;
 }
-.contact-form .form-group h4{
-  font-family:"Saira Extra Condensed", sans-serif;
-  font-size:21px;
-}
 .contact-form .btn-main{
   margin-top:0;
   width:100%;
@@ -603,11 +611,12 @@ aside#secondary>section{
 .past-work-card h2>a{
   color:#000;
 }
-.past-work-card h4{
-  text-transform:uppercase;
-  font-family:"Saira Extra Condensed", sans-serif;
-  font-weight:700;
-  font-size:21px;
+
+.go-back{
+  margin-bottom:40px;
+}
+.go-back>.btn-main{
+  margin-top:0;
 }
 
 footer{
