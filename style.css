@@ -492,6 +492,80 @@ aside#secondary>section{
   width:100%;
 }
 
+.service-card{
+  text-align:center;
+  padding-top:100px;
+  position:relative;
+  margin-top:40px;
+}
+.service-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  background-image:url(images/service-sprites.png);
+  background-repeat:no-repeat;
+  margin-left:auto;
+  margin-right:auto;
+}
+#books:before{
+  background-position:0px -10px;
+  height:64px;
+  width:83px;
+  top:15px;
+}
+#documents:before{
+  background-position:-102px 0px;
+  height:83px;
+  width:71px;
+}
+#digitization:before{
+  background-position:-200px -14px;
+  height:56px;
+  width:83px;
+  top:15px;
+}
+#photographic-media:before{
+  background-position:-139px -89px;
+  height:84px;
+  width:57px;
+}
+#documentation:before{
+  background-position:0px -88px;
+  height:84px;
+  width:60px;
+}
+#archives-program-establishment:before{
+  background-position:-74px -88px;
+  height:84px;
+  width:52px;
+}
+#web-hosting:before{
+  background-position:-210px -89px;
+  height:78px;
+  width:83px;
+}
+
+#aic{
+  background-color:#6c2737;
+  padding-top:40px;
+  padding-bottom:40px;
+}
+#aic .container{
+  max-width:800px;
+}
+#aic p{
+  color:#fff;
+  font-style:italic;
+  text-align:center;
+  border-top:1px solid #fff;
+  border-bottom:1px solid #fff;
+  margin-bottom:0;
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
 footer{
   padding-top:40px;
   padding-bottom:40px;
