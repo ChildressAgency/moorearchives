@@ -650,6 +650,9 @@ footer{
 
 
 @media (max-width:767px){
+  .masthead .social{
+    display:none !important;
+  }
   .masthead .hours-phone{
     position:relative;
     right:0;

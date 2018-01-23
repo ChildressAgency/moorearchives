@@ -60,6 +60,7 @@ function moorearchives_styles(){
 add_theme_support('post-thumbnails');
 
 register_nav_menu( 'header-nav', 'Header Navigation' );
+register_nav_menu('footer-nav', 'Footer Navigation');
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
@@ -265,4 +266,59 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 			echo $fb_output;
 		}
 	}
+}
+
+function moorearchives_header_fallback_menu(){ ?>
+  <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li<?php if(is_front_page()){ echo ' class="active"'; } ?>><a href="<?php echo home_url(); ?>">Home</a></li>
+      <li<?php if(is_page('about')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('about'); ?>">About</a></li>
+      <li<?php if(is_page('services')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('services'); ?>">Services</a></li>
+      <li<?php if(is_page('our-work') || is_singular('our-work')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('our-work'); ?>">Our Work</a></li>
+      <li<?php if(is_page('contact')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('contact'); ?>">Contact</a></li>
+      <li<?php if(is_page('book-reports')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('book-reports'); ?>">Book Reports</a></li>
+    </ul>
+  </div>
+<?php }
+
+function moorearchives_footer_fallback_menu(){ ?>
+  <nav id="footer-nav">
+    <ul class="nav navbar-nav">
+      <li<?php if(is_front_page()){ echo ' class="active"'; } ?>><a href="<?php echo home_url(); ?>">Home</a></li>
+      <li<?php if(is_page('about')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('about'); ?>">About</a></li>
+      <li<?php if(is_page('services')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('services'); ?>">Services</a></li>
+      <li<?php if(is_page('our-work')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('our-work'); ?>">Our Work</a></li>
+      <li<?php if(is_page('contact')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('contact'); ?>">Contact</a></li>
+      <li<?php if(is_page('book-reports')){ echo ' class="active"'; } ?>><a href="<?php echo home_url('book-reports'); ?>">Book Reports</a></li>
+    </ul>
+  </nav>
+<?php }
+
+
+add_action('init', 'moorearchives_create_post_type');
+function moorearchives_create_post_type(){
+  $our_work_labels = array(
+    'name' => 'Our Work',
+    'singular_name' => 'Our Work',
+    'menu_name' => 'Our Work',
+    'add_new_item' => 'Add New Project',
+    'search_items' => 'Search Our Work'
+  );
+  $our_work_args = array(
+    'labels' => $our_work_labels,
+    'public' => true,
+    'menu_position' => 5,
+    'supports' => array('title', 'author', 'editor', 'revisions', 'thumbnail')
+  );
+  register_post_type('our-work', $our_work_args);
+} 
+
+if(function_exists('acf_add_options_page')){
+  acf_add_options_page(array(
+    'page_title' => 'General Settings',
+    'menu_title' => 'General Settings',
+    'menu_slug' => 'general-settings',
+    'capability' => 'edit_posts',
+    'redirect' => false
+  ));
 }
