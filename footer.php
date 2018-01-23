@@ -1,20 +1,133 @@
+  <section id="nhpaQuote">
+    <div class="container">
+      <?php if(get_field('quote')): ?>
+        <?php the_field('quote'); ?>
+        <cite>- <?php the_field('quote_author'); ?></cite>
+      <?php else: ?>
+        <?php the_field('quote', 'option'); ?>
+        <cite>- <?php the_field('quote_author', 'option'); ?></cite>
+      <?php endif; ?>
+    </div>
+  </section>
+  <?php if(is_front_page()): ?>
+    <section id="feeds">
+      <div class="container-fluid container-sm-height">
+        <div class="row row-sm-height">
+          <div id="instagram" class="col-sm-6 col-sm-height">
+            <div class="feed">
+              <i class="fa fa-instagram"></i>
+              <?php echo do_shortcode('[instagram_feed]'); ?>
+              <div class="feed-nav">
+                <a href="<?php the_field('instagram', 'option'); ?>">Go To Instagram</a>
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/arrows-icon.png" class="img-responsive center-block" alt="" />
+                <a href="<?php the_field('instagram', 'option'); ?>">View Gallery</a>
+              </div>
+            </div>
+          </div>
+          <div id="twitch" class="col-sm-6 col-sm-height">
+            <div class="feed">
+              <i class="fa fa-twitch"></i>
+              <?php echo do_shortcode('[twitch_feed]'); ?>
+              <div class="feed-nav">
+                <a href="<?php the_field('twitch', 'option'); ?>">Go To Twitch</a>
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/arrows-icon.png" class="img-responsive center-block" alt="" />
+                <a href="<?php the_field('twitch', 'option'); ?>">View More Videos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <?php 
+      $featured_project = new WP_Query(array(
+        'post_type' => 'our_work',
+        'posts_per_page' => 1,
+        'post_status' => 'publish'
+      ));
+      $featured_project_id = null;
+
+      if($featured_project->have_posts()): ?>
+        <section id="latestProjects">
+          <div class="container">
+            <h2>Latest Projects</h2>
+            <div class="row">
+              <div class="col-sm-6">
+                <?php while($featured_project->have_posts()): $featured_project->the_post(); 
+                  $featured_project_featured_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+                  $featured_project_featured_img_url = $featured_project_featured_image[0];
+                  $featured_project_id = get_the_ID(); ?>
+
+                  <a href="<?php the_permalink(); ?>" class="featured-project" style="background-image:url(<?php echo $featured_project_featured_img_url; ?>);">
+                    <div class="featured-project-caption">
+                      <h3><?php the_title(); ?></h3>
+                      <hr />
+                      <?php the_excerpt(); ?>
+                      <p class="project-date"><?php echo get_the_date('F j, Y'); ?></p>
+                    </div>
+                    <div class="overlay"></div>
+                  </a>
+                <?php endwhile; $featured_project->reset_postdata(); ?>
+              </div>
+              <div class="col-sm-6">
+                <?php $projects = new WP_Query(array(
+                  'post_type' => 'our_work',
+                  'posts_per_page' => 3,
+                  'post_status' => 'publish',
+                  'post__not_in' => array($featured_project_id)
+                ));
+
+                if($projects->have_posts()): ?>
+                  <ul class="list-unstyled project-list">
+                    <?php while($projects->have_posts()): $projects->the_post();
+                      $project_featured_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
+                      $project_featured_img_url = $project_featured_img[0]; ?>
+
+                      <li>
+                        <a href="<?php the_permalink(); ?>" style="background-image:url(<?php echo $project_featured_img_url; ?>);">
+                          <div class="project-caption">
+                            <h3><?php the_title(); ?></h3>
+                            <p class="project-date"><?php echo get_the_date('F j, Y'); ?></p>
+                          </div>
+                          <div class="overlay"></div>
+                        </a>
+                      </li>
+
+                    <?php endwhile; $projects->reset_postdata(); ?>
+                  </ul>
+                <?php endif; ?>
+                <a href="<?php echo home_url('our-work'); ?>" class="btn-main">View All Projects</a>
+              </div>
+            </div>
+          </div>
+        </section>
+  <?php endif; ?>
+
   <section id="contactLocation">
     <div class="container-fluid container-sm-height">
       <div class="row row-sm-height">
         <div id="chat" class="col-sm-6 col-sm-height">
           <div class="contact-location">
             <i class="fa fa-comment"></i>
-            <h2>Let's Chat.</h2>
-            <p>Follow the link below to reach our about your archival needs. After filling out the form, we will have a better understanding of how best to serve you.</p>
-            <a href="#" class="btn-main">Go To form</a>
+            <?php the_field('lets_chat_section', 'option'); ?>
+            <a href="<?php echo home_url('contact'); ?>" class="btn-main">Go To form</a>
           </div>
         </div>
-        <div id="contact" class="col-sm-6 col-sm-height">
-          <div class="contact-location">
-            <i class="fa fa-map-marker"></i>
-            <h2>Serving Virginia, Maryland, and Washington D.C.</h2>
+        <?php if(is_front_page()): ?>
+          <div id="contact" class="col-sm-6 col-sm-height">
+            <div class="contact-location">
+              <i class="fa fa-map-marker"></i>
+              <h2>Serving Virginia, Maryland, and Washington D.C.</h2>
+            </div>
           </div>
-        </div>
+        <?php else: ?>
+          <div id="nextPage" class="col-sm-6 col-sm-height">
+            <div class="contact-location">
+              <h2><?php the_field('next_page_text'); ?></h2>
+              <a href="<?php the_field('next_page_link'); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/right-arrow.png" class="img-responsive center-block" alt="" /></a>
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </section>
