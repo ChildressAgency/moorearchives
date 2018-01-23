@@ -310,8 +310,87 @@ function moorearchives_create_post_type(){
     'menu_position' => 5,
     'supports' => array('title', 'author', 'editor', 'revisions', 'thumbnail')
   );
-  register_post_type('our-work', $our_work_args);
-} 
+  register_post_type('our_work', $our_work_args);
+  register_taxonomy('work_category',
+    'our_work',
+    array(
+      'hierarchical' => true,
+      'show_admin_column' => true,
+      'labels' => array(
+        'name' => 'Work Categories',
+        'singular_name' => 'Work Category'
+      )
+    )
+  );
+}
+
+add_action('restrict_manage_posts', 'moorearchives_filter_parts_by_taxonomy');
+function moorearchives_filter_parts_by_taxonomy(){
+  global $typenow;
+  $post_type = 'our_work',
+  $taxonomy = 'work_category';
+
+  if($typenow == $post_type){
+    $select = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+    $info_taxonomy = get_taxonomy($taxonomy);
+    wp_dropdown_categories(array(
+      'show_option_all' => __("Show All {$info_taxonomy->label}"),
+      'taxonomy' => $taxonomy,
+      'name' => $taxonomy,
+      'orderby' => 'name',
+      'selected' => $selected,
+      'show_count' => true,
+      'hide_empty' => false
+    ));
+  }
+}
+
+add_filter('parse_query', 'moorearchives_convert_part_id_to_term_in_query');
+function moorearchives_convert_part_id_to_term_in_query($query){
+  global $pagenow;
+  $post_type = 'our_work';
+  $taxonomy = 'work_category',
+  $q_vars = &$query->query_vars;
+
+  if($pagenow == 'edit.php'
+    && isset($q_vars['post_type'])
+    && $q_vars['post_type'] == $post_type
+    && isset($q_vars[$taxonomy])
+    && is_numeric($q_vars[$taxonomy])
+    && $q_vars[$taxonomy] != 0){
+      $term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);
+      $q_vars[$taxonomy] = $term->slug;
+    }
+}
+
+add_filter('manage_edit-our_work_columns', 'moorearchives_edit_our_work_columns');
+function moorearchives_edit_our_work_columns($column){
+  $columns = array(
+    'cb' => '<input type="checkbox" />',
+    'title' => __('Work'),
+    'work_category' => __('Work Category'),
+    'date' => __('Date')
+  );
+  return $columns;
+}
+
+add_action('manage_our_work_posts_custom_column', 'moorearchives_manage_our_work_columns', 10, 2);
+function moorearchives_manage_our_work_columns($column, $post_id){
+  if($column == 'work_category'){
+    $terms = get_the_terms($post_id, 'work_category');
+
+    if($terms && !is_wp_error($terms)){
+      $term_list = array();
+
+      foreach($terms as $term){
+        $term_list[] = $term->name;
+      }
+
+      $work_categories = implode(', ', $term_list);
+      echo $work_categories;
+    }
+  }
+}
 
 if(function_exists('acf_add_options_page')){
   acf_add_options_page(array(
