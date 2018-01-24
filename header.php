@@ -10,7 +10,7 @@
   <meta http-equiv="cache-control" content="public">
   <meta http-equiv="cache-control" content="private">
 
-  <title>Moore Archives</title>
+  <title><?php wp_title(' | ', 'echo', 'right'); ?><?php bloginfo('name'); ?></title>
 
   <?php wp_head(); ?>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
