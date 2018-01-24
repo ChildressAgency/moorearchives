@@ -44,26 +44,35 @@
 
       <section id="pastWork">
         <h2 class="work-section-title">Past Work</h2>
-        <?php
+        <?php 
+          $cur_term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
           $terms = get_terms('work_categories');
           if(!empty($terms) && !is_wp_error($terms)): ?>
             <nav id="work-nav">
               <ul class="nav navbar-nav">
-                <li class="active">
+                <li<?php if(is_page('our-work')){ echo ' class="active"'; } ?>>
                   <a href="<?php echo home_url('our-work'); ?>">All</a>
                 </li>
                 <?php foreach($terms as $term): ?>
-                  <li><a href="<?php esc_url(get_term_link($term); ?>"><?php echo $term->name; ?></a></li>
+                  <li<?php if($cur_term->name == $term->name){ echo ' class="active"'; } ?>><a href="<?php esc_url(get_term_link($term); ?>"><?php echo $term->name; ?></a></li>
                 <?php endforeach; ?>
               </ul>
             </nav>
         <?php endif; ?>
 
         <?php
+          
           $projects = new WP_Query(array(
             'post_type' => 'our_work',
             'post_status' => 'publish',
-            'post__not_in' => array($featured_project_id);
+            'post__not_in' => array($featured_project_id),
+            'tax_query' => array(
+              array(
+                'taxonomy' => 'work_category',
+                'field' => 'slug',
+                'terms' => $cur_term->slug
+              )
+            )
           ));
 
           if($projects->have_posts()): ?>
