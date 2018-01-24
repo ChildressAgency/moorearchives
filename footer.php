@@ -45,18 +45,20 @@
       $featured_project_id = get_field('featured_project', $our_work_page_id);
 
       if($featured_project_id){
-        $featured_project = new WP_Query(array(
+        $featured_project_args = array(
           'post_type' => 'our_work',
           'p' => $featured_project_id
-        ));
+        );
       }
       else{
-        $featured_project = new WP_Query(array(
+        $featured_project_args = array(
           'post_type' => 'our_work',
           'posts_per_page' => 1,
           'post_status' => 'publish'
-        ));
+        );
       }
+
+      $featured_project = new WP_Query($featured_project_args);
 
       if($featured_project->have_posts()): ?>
         <section id="latestProjects">
@@ -92,10 +94,12 @@
                   <ul class="list-unstyled project-list">
                     <?php while($projects->have_posts()): $projects->the_post();
                       $project_featured_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-                      $project_featured_img_url = $project_featured_img[0]; ?>
+                      $project_featured_img_url = $project_featured_img[0]; 
+                      $project_featured_img_x_pos = get_field('featured_image_horizontal_position'); 
+                      $project_featured_img_y_pos = get_field('featured_image_vertical_position'); ?>
 
                       <li>
-                        <a href="<?php the_permalink(); ?>" style="background-image:url(<?php echo $project_featured_img_url; ?>);">
+                        <a href="<?php the_permalink(); ?>" style="background-image:url(<?php echo $project_featured_img_url; ?>); background-position:<?php echo $project_featured_img_x_pos . ' ' . $project_featured_img_y_pos; ?>;">
                           <div class="project-caption">
                             <h3><?php the_title(); ?></h3>
                             <p class="project-date"><?php echo get_the_date('F j, Y'); ?></p>
