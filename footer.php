@@ -40,12 +40,23 @@
     </section>
 
     <?php 
-      $featured_project = new WP_Query(array(
-        'post_type' => 'our_work',
-        'posts_per_page' => 1,
-        'post_status' => 'publish'
-      ));
-      $featured_project_id = null;
+      $our_work_page = get_page_by_path('our-work');
+      $our_work_page_id = $our_work_page->ID;
+      $featured_project_id = get_field('featured_project', $our_work_page_id);
+
+      if($featured_project_id){
+        $featured_project = new WP_Query(array(
+          'post_type' => 'our_work',
+          'p' => $featured_project_id
+        ));
+      }
+      else{
+        $featured_project = new WP_Query(array(
+          'post_type' => 'our_work',
+          'posts_per_page' => 1,
+          'post_status' => 'publish'
+        ));
+      }
 
       if($featured_project->have_posts()): ?>
         <section id="latestProjects">
