@@ -648,6 +648,14 @@ footer{
   color:#6c2737;
 }
 
+.gallery ul{
+  list-style:none;
+  padding-left:0;
+}
+.gallery ul>li{
+  display:inline-block;
+}
+
 
 @media (max-width:767px){
   .masthead .social{
