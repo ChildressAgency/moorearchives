@@ -499,7 +499,7 @@ aside#secondary>section{
   margin-top:0;
   width:100%;
 }
-
+/*
 .service-card{
   text-align:center;
   padding-top:100px;
@@ -512,10 +512,25 @@ aside#secondary>section{
   top:0;
   left:0;
   right:0;
-  background-image:url(images/service-sprites.png);
+  /*background-image:url(images/service-sprites.png);
   background-repeat:no-repeat;
   margin-left:auto;
   margin-right:auto;
+  height:84px;
+  width:84px;
+}*/
+.service-card{
+  text-align:center;
+  padding-top:85px;
+  position:relative;
+  margin-top:40px;
+  background-repeat:no-repeat;
+  background-position:center top;
+}
+.service-card h2+h3{
+  margin-top:-10px;
+  color:#6c2737;
+  font-weight:400;
 }
 #books:before{
   background-position:0px -10px;
