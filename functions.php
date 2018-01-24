@@ -294,6 +294,18 @@ function moorearchives_footer_fallback_menu(){ ?>
   </nav>
 <?php }
 
+add_action('widgets_init', 'moorearchives_widgets_init');
+function moorearchives_widgets_init(){
+  register_sidebar(array(
+    'name' => __('Book Report Sidebar', 'moorearchives'),
+    'id' => 'sidebar-1',
+    'description' => __('Add widgets here to appear in your sidebar on blog posts and archive pages.', 'moorearchives'),
+    'before_widget' => '<section id="%1$s" class="widget %2$s">',
+    'after_widget' => '</section>',
+    'before_title' => '<h3>',
+    'after_title' => '</h3>'
+  ));
+}
 
 add_action('init', 'moorearchives_create_post_type');
 function moorearchives_create_post_type(){
