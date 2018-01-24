@@ -1,0 +1,43 @@
+<div class="contact-form">
+  <div class="form-group">
+    <label for="fname" class="sr-only">First Name</label>
+    [text* fname id:fname class:form-control class:input-lg placeholder "FIRST NAME*"]
+  </div>
+  <div class="form-group">
+    <label for="lname" class="sr-only">Last Name</label>
+    [text lname id:lname class:form-control class:input-lg placeholder "LAST NAME"]
+  </div>
+  <div class="form-group">
+    <label for="your-email" class="sr-only">Email</label>
+    [email* your-email id:your-email class:form-control class:input-lg placeholder "EMAIL*"]
+  </div>
+  <div class="form-group">
+    <label for="phone" class="sr-only">Phone</label>
+    [text* phone id:phone class:form-control class:input-lg placeholder "PHONE*"]
+  </div>
+  <div class="form-group">
+    <h4>REASON OF INQUIRY*</h4>
+    <div class="radio">
+      [radio reason use_label_element "Archive Solutions"]
+    </div>
+    <div class="radio">
+      [radio reason use_label_element "Documents"]
+    </div>
+    <div class="radio">
+      [radio reason use_label_element "Photographic Media"]
+    </div>
+    <div class="radio">
+      [radio reason use_label_element "Digital Services"]
+    </div>
+    <div class="radio">
+      [radio reason use_label_element "Other"]
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="message" class="sr-only">How Can We Help?</label>
+    [textarea message x4 id:message class:form-control class:input-lg placeholder "HOW CAN WE HELP?"]
+  </div>
+  <div class="form-group">
+    [submit class:btn-main "SEND"]
+  </div>
+</div>
