@@ -413,3 +413,9 @@ if(function_exists('acf_add_options_page')){
     'redirect' => false
   ));
 }
+
+add_filter('next_posts_link_attributes', 'moorearchives_posts_link_attributes');
+add_filter('previous_posts_link_attributes', 'moorearchives_posts_link_attributes');
+function moorearchives_posts_link_attributes(){
+  return 'class="btn-main"';
+}
