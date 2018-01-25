@@ -16,7 +16,7 @@
           <div id="instagram" class="col-sm-6 col-sm-height">
             <div class="feed">
               <i class="fa fa-instagram"></i>
-              <?php echo do_shortcode('[instagram_feed]'); ?>
+              <?php the_field('instagram_feed', 'option'); ?>
               <div class="feed-nav">
                 <a href="<?php the_field('instagram', 'option'); ?>">Go To Instagram</a>
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/arrows-icon.png" class="img-responsive center-block" alt="" />
@@ -27,7 +27,7 @@
           <div id="twitch" class="col-sm-6 col-sm-height">
             <div class="feed">
               <i class="fa fa-twitch"></i>
-              <?php echo do_shortcode('[twitch_feed]'); ?>
+              <?php the_field('twitch_feed', 'option'); ?>
               <div class="feed-nav">
                 <a href="<?php the_field('twitch', 'option'); ?>">Go To Twitch</a>
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/arrows-icon.png" class="img-responsive center-block" alt="" />
