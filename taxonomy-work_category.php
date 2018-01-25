@@ -42,7 +42,7 @@
             </article>
         <?php endwhile; endif; wp_reset_postdata(); ?>
 
-      <section id="pastWork">
+      <section id="pastWork" class="past-works">
         <h2 class="work-section-title">Past Work</h2>
         <?php 
           $cur_term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
@@ -96,7 +96,7 @@
               <?php $i++; endwhile; ?>
             </div>
         <?php endif; wp_reset_postdata(); ?>
-        <a href="#" class="lead-more"></a>
+        <a href="#" class="load-more"></a>
       </div>
     </section>
   </main>

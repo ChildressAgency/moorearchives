@@ -42,7 +42,7 @@
             </article>
         <?php endwhile; endif; wp_reset_postdata(); ?>
 
-      <section id="pastWork">
+      <section id="pastWork" class="past-works">
         <h2 class="work-section-title">Past Work</h2>
         <?php
           $terms = get_terms('work_categories');
@@ -76,7 +76,7 @@
                 $project_featured_img_y_pos = get_field('featured_image_vertical_position'); ?>
 
                 <div class="col-sm-6">
-                  <div class="past-work-card">
+                  <div class="past-work past-work-card">
                     <div class="past-work-img" style="background-image:url(<?php echo $project_featured_img_url; ?>); background_position:<?php echo $project_featured_img_x_pos . ' ' . $project_featured_img_y_pos; ?>;"></div>
                     <h2>
                       <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
@@ -87,7 +87,7 @@
               <?php $i++; endwhile; ?>
             </div>
         <?php endif; wp_reset_postdata(); ?>
-        <a href="#" class="lead-more"></a>
+        <a href="#" class="load-more"></a>
       </div>
     </section>
   </main>

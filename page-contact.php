@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-6">
           <div class="contact-info">
-            <h2>Email<span><?php the_field('hours', 'option'); ?></span></h2>
+            <h2>Email<span><?php the_field('email', 'option'); ?></span></h2>
           </div>
         </div>
       </div>

@@ -339,7 +339,7 @@ function moorearchives_create_post_type(){
 add_action('restrict_manage_posts', 'moorearchives_filter_parts_by_taxonomy');
 function moorearchives_filter_parts_by_taxonomy(){
   global $typenow;
-  $post_type = 'our_work',
+  $post_type = 'our_work';
   $taxonomy = 'work_category';
 
   if($typenow == $post_type){
@@ -361,7 +361,7 @@ add_filter('parse_query', 'moorearchives_convert_part_id_to_term_in_query');
 function moorearchives_convert_part_id_to_term_in_query($query){
   global $pagenow;
   $post_type = 'our_work';
-  $taxonomy = 'work_category',
+  $taxonomy = 'work_category';
   $q_vars = &$query->query_vars;
 
   if($pagenow == 'edit.php'

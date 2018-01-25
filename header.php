@@ -80,7 +80,7 @@
   <?php else: ?>
     <div class="hero">
       <div class="container">
-        <h1><?php echo is_singular('our-work') ? 'Our Work' : get_the_title(); ?></h1>
+        <h1><?php echo is_singular('our_work') ? 'Our Work' : get_the_title(); ?></h1>
       </div>
     </div>
   <?php endif; ?>
