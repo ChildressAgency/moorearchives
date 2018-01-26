@@ -2,7 +2,6 @@
   <main id="main">
     <div class="container">
       <?php 
-        if(get_field('featured_project')): 
           $featured_project_id = get_field('featured_project');
 
           if($featured_project_id){
@@ -42,7 +41,7 @@
             </article>
         <?php endwhile; endif; wp_reset_postdata(); ?>
 
-      <section id="pastWork" class="past-works">
+      <section id="pastWork">
         <h2 class="work-section-title">Past Work</h2>
         <?php
           $terms = get_terms('work_categories');
@@ -53,7 +52,7 @@
                   <a href="<?php echo home_url('our-work'); ?>">All</a>
                 </li>
                 <?php foreach($terms as $term): ?>
-                  <li><a href="<?php esc_url(get_term_link($term); ?>"><?php echo $term->name; ?></a></li>
+                  <li><a href="<?php esc_url(get_term_link($term)); ?>"><?php echo $term->name; ?></a></li>
                 <?php endforeach; ?>
               </ul>
             </nav>
@@ -63,11 +62,11 @@
           $projects = new WP_Query(array(
             'post_type' => 'our_work',
             'post_status' => 'publish',
-            'post__not_in' => array($featured_project_id);
+            'post__not_in' => array($featured_project_id)
           ));
 
           if($projects->have_posts()): ?>
-            <div class="row">
+            <div class="row" class="past-works">
               <?php $i=0; while($projects->have_posts()): $projects->the_post();
                 if($i%2==0){ echo '<div class="clearfix"></div>'; } 
                 $project_featured_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);

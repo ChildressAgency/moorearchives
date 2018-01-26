@@ -343,7 +343,7 @@ function moorearchives_filter_parts_by_taxonomy(){
   $taxonomy = 'work_category';
 
   if($typenow == $post_type){
-    $select = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+    $selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
     $info_taxonomy = get_taxonomy($taxonomy);
     wp_dropdown_categories(array(
       'show_option_all' => __("Show All {$info_taxonomy->label}"),

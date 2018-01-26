@@ -16,7 +16,7 @@
           <div id="instagram" class="col-sm-6 col-sm-height">
             <div class="feed">
               <i class="fa fa-instagram"></i>
-              <?php the_field('instagram_feed', 'option'); ?>
+              <?php the_field('instagram_feed'); ?>
               <div class="feed-nav">
                 <a href="<?php the_field('instagram', 'option'); ?>">Go To Instagram</a>
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/arrows-icon.png" class="img-responsive center-block" alt="" />
@@ -27,7 +27,7 @@
           <div id="twitch" class="col-sm-6 col-sm-height">
             <div class="feed">
               <i class="fa fa-twitch"></i>
-              <?php the_field('twitch_feed', 'option'); ?>
+              <?php the_field('twitch_feed'); ?>
               <div class="feed-nav">
                 <a href="<?php the_field('twitch', 'option'); ?>">Go To Twitch</a>
                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/arrows-icon.png" class="img-responsive center-block" alt="" />
@@ -68,7 +68,7 @@
               <div class="col-sm-6">
                 <?php while($featured_project->have_posts()): $featured_project->the_post(); 
                   $featured_project_featured_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-                  $featured_project_featured_img_url = $featured_project_featured_image[0];
+                  $featured_project_featured_img_url = $featured_project_featured_img[0];
                   $featured_project_id = get_the_ID(); ?>
 
                   <a href="<?php the_permalink(); ?>" class="featured-project" style="background-image:url(<?php echo $featured_project_featured_img_url; ?>);">
@@ -116,7 +116,7 @@
             </div>
           </div>
         </section>
-  <?php endif; ?>
+    <?php endif; endif; ?>
 
   <section id="contactLocation">
     <div class="container-fluid container-sm-height">
@@ -124,6 +124,7 @@
         <div id="chat" class="col-sm-6 col-sm-height">
           <div class="contact-location">
             <i class="fa fa-comment"></i>
+            <h2>Let's Chat</h2>
             <?php the_field('lets_chat_section', 'option'); ?>
             <a href="<?php echo home_url('contact'); ?>" class="btn-main">Go To form</a>
           </div>
@@ -138,8 +139,8 @@
         <?php else: ?>
           <div id="nextPage" class="col-sm-6 col-sm-height">
             <div class="contact-location">
-              <h2><?php the_field('next_page_text'); ?></h2>
-              <a href="<?php the_field('next_page_link'); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/right-arrow.png" class="img-responsive center-block" alt="" /></a>
+              <h2><?php echo get_field('next_page_text') ? get_field('next_page_text') : 'Contact Us'; ?></h2>
+              <a href="<?php echo get_field('next_page_link') ? get_field('next_page_link') : home_url('contact'); ?>"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/right-arrow.png" class="img-responsive center-block" alt="" /></a>
             </div>
           </div>
         <?php endif; ?>
@@ -150,7 +151,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-2">
-          <img src="images/logo-icon.png" class="img-responsive center-block" alt="" />
+          <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-icon.png" class="img-responsive center-block" alt="" />
         </div>
         <div class="col-sm-8">
           <p class="footer-contact-info"><?php the_field('hours', 'option'); ?> &bull; <?php the_field('phone', 'option'); ?> &bull; <?php the_field('email', 'option'); ?></p>

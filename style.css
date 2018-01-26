@@ -412,13 +412,15 @@ article.post .post-title{
 .load-more{
   display:block;
   background-color:#f00;
-  width:100%;
+  width:275px;
   height:50px;
   margin-top:60px;
   color:#fff;
   position:relative;
   text-align:center;
   padding-top:15px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .load-more:after{
   content:"";
@@ -427,8 +429,8 @@ article.post .post-title{
   position:absolute;
   bottom:-29px;
   border-top:29px solid #f00;
-  border-left:274px solid transparent;
-  border-right:263px solid transparent;
+  border-left:140px solid transparent;
+  border-right:135px solid transparent;
   left:0;
 }
 .load-more:hover{

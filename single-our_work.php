@@ -18,6 +18,7 @@
           <h4><?php echo get_the_date('F j, Y'); ?></h4>
           <hr />
           <?php the_content(); ?>
+        <?php endwhile; endif; ?>
         <nav id="single-nav">
           <ul class="pager">
             <li class="previous"><?php previous_post_link('%link', 'Previous', TRUE); ?></li>
