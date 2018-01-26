@@ -199,6 +199,11 @@ hr{
   background-size:cover;
   padding-top:80px;
   padding-bottom:80px;
+  box-shadow:inset 0px 164px 100px -99px #fff;
+}
+#main.alt-bg{
+  background-size:contain;
+  background-repeat:repeat-y;
 }
 #main>.container{
   max-width:850px;
@@ -398,8 +403,6 @@ article h2{
 
 article.post{
   text-align:left;
-}
-article.post+article.post{
   margin-top:60px;
 }
 article.post h3.post-date{
@@ -421,6 +424,7 @@ article.post .post-title{
   padding-top:15px;
   margin-left:auto;
   margin-right:auto;
+  border:none;
 }
 .load-more:after{
   content:"";
@@ -437,6 +441,13 @@ article.post .post-title{
   color:#fff;
   text-decoration:none;
   opacity:.6;
+}
+.load-more:focus{
+  color:#fff;
+  text-decoration:none;
+}
+.load-more.disabled{
+  opacity:.3;
 }
 
 aside#secondary>section{
@@ -508,6 +519,9 @@ aside#secondary>section{
   margin-top:40px;
   background-repeat:no-repeat;
   background-position:center top;
+  max-width:365px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .service-card h2+h3{
   margin-top:-10px;

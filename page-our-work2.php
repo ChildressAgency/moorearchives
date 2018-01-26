@@ -58,46 +58,12 @@
             </nav>
         <?php endif; ?>
 
-      <div id="posts">
-        <?php
-          $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-          $ppp = 6;
-          $projects = new WP_Query(array(
-            'post_type' => 'our_work',
-            'post_status' => 'publish',
-            'post__not_in' => array($featured_project_id),
-            'posts_per_page' => $ppp,
-            'paged' => $paged
-          ));
+        <div class="row past-works">
+          <?php $i=0; ?>
+          <?php echo do_shortcode('[ajax_load_more post_type="our_work" posts_per_page="6" container_type="div" scroll="false" post__not_in="' . $featured_project_id . '"]'); ?>
+        </div>
 
-          if($projects->have_posts()):
-            $max_page = $projects->max_num_pages; ?>
-            <div id="p<?php echo $paged; ?>" class="page">
-            <div class="row past-works">
-              <?php if($paged == $max_page){ echo '<span class="lastpage"></span>'; } ?>
-              <?php $i=0; while($projects->have_posts()): $projects->the_post();
-                if($i%2==0){ echo '<div class="clearfix"></div>'; } 
-                $project_featured_img = wp_get_attachment_image_src(get_post_thumbnail_id(), 'full', true);
-                $project_featured_img_url = $project_featured_img[0];
-                $project_featured_img_x_pos = get_field('featured_image_horizontal_position');
-                $project_featured_img_y_pos = get_field('featured_image_vertical_position'); ?>
-
-                <div class="col-sm-6">
-                  <div class="past-work past-work-card">
-                    <div class="past-work-img" style="background-image:url(<?php echo $project_featured_img_url; ?>); background_position:<?php echo $project_featured_img_x_pos . ' ' . $project_featured_img_y_pos; ?>;"></div>
-                    <h2>
-                      <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                    </h2>
-                    <h4 class="work-date"><?php echo get_the_date('F j, Y'); ?></h4>
-                  </div>
-                </div>
-              <?php $i++; endwhile; ?>
-            </div>
-            </div><!-- #p .page -->
-        <?php endif; wp_reset_postdata(); ?>
-        </div><!-- #posts -->
-        <a href="#" class="load-more">Load More</a>
-      </div><!-- .container -->
+      </div>
     </section>
   </main>
 <?php get_footer(); ?>

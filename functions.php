@@ -1,11 +1,11 @@
 <?php
-/*
+
 add_action('wp_footer', 'show_template');
 function show_template() {
 	global $template;
 	print_r($template);
 }
-*/
+
 add_action('wp_enqueue_scripts', 'jquery_cdn');
 function jquery_cdn(){
   if(!is_admin()){
@@ -43,7 +43,7 @@ function moorearchives_scripts(){
   
   wp_enqueue_script('bootstrap-script');
   wp_enqueue_script('fontawesome');
-  //wp_enqueue_script('moorearchives-scripts');  
+  wp_enqueue_script('moorearchives-scripts');  
 }
 
 add_action('wp_enqueue_scripts', 'moorearchives_styles');
